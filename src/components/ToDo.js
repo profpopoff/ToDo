@@ -5,6 +5,7 @@ export default function ToDo({ todo, toggleTask }) {
     <div
       className={`todo-item ${todo.complete && "complete"}`}
       onClick={() => toggleTask(todo.id)}>
+      <span></span>
       {todo.task}
     </div>
   )

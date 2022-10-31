@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import ToDo from "./components/ToDo"
 import ToDoForm from "./components/ToDoForm"
+import Buttons from "./components/Buttons"
 
 export default function App() {
 
@@ -8,7 +9,7 @@ export default function App() {
 
   const [filter, setFilter] = useState({ isActive: false })
 
-  const addTask = (userInput) => {
+  const addTodo = (userInput) => {
     if (userInput) {
       const newItem = {
         id: Math.random().toString(36).substring(2, 9),
@@ -30,7 +31,7 @@ export default function App() {
         <h1>todos</h1>
       </header>
       <main>
-        <ToDoForm addTask={addTask} />
+        <ToDoForm addTodo={addTodo} />
         {todos.map(todo => (!filter.isActive ? true : filter.isComlpete === todo.complete) && (
           <ToDo
             key={todo.id}
@@ -39,24 +40,7 @@ export default function App() {
           />
         ))}
         {!!todos.length &&
-          <div className="buttons">
-            <span>{todos.filter(todo => !todo.complete).length} items left</span>
-            <nav>
-              <button
-                className={!filter.isActive && "active"}
-                onClick={() => setFilter({ isActive: false })}
-              >All</button>
-              <button
-                className={filter.isActive && !filter.isComlpete && "active"}
-                onClick={() => setFilter({ isActive: true, isComlpete: false })}
-              >Active</button>
-              <button
-                className={filter.isActive && !!filter.isComlpete && "active"}
-                onClick={() => setFilter({ isActive: true, isComlpete: true })}
-              >Complete</button>
-            </nav>
-            <button onClick={() => setTodos(todos.filter(todo => !todo.complete))}>Clear complete</button>
-          </div>
+          <Buttons todos={todos} setTodos={setTodos} filter={filter} setFilter={setFilter} />
         }
       </main>
     </div>

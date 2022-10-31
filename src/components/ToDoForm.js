@@ -1,18 +1,18 @@
 import React, { useState } from "react"
 
-export default function ToDoForm({ addTask }) {
+export default function ToDoForm({ addTodo }) {
 
    const [userInput, setUserInput] = useState('')
 
    const handleSubmit = (e) => {
       e.preventDefault()
-      addTask(userInput)
+      addTodo(userInput)
       setUserInput('')
    }
 
    return (
       <form onSubmit={handleSubmit}>
-         <button>Save</button>
+         <button><span></span></button>
          <input
             type="text"
             value={userInput}
